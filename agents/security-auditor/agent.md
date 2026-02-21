@@ -5,7 +5,6 @@ model: openai/gpt-5.3-codex
 variant: high
 temperature: 0.1
 hidden: true
-steps: 8
 permission:
   bash:
     "*": deny

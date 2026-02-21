@@ -3,7 +3,7 @@ description: Root-cause specialist for failures and unstable behavior.
 mode: all
 model: openai/gpt-5.3-codex
 temperature: 0.1
-steps: 8
+steps: 50
 permission:
   bash:
     "*": deny

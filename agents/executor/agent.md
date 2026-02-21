@@ -3,7 +3,6 @@ description: Main implementation owner for coding, validation, and delivery qual
 mode: primary
 model: zai-coding-plan/glm-4.7
 temperature: 0.1
-steps: 20
 permission:
   bash:
     "*": allow

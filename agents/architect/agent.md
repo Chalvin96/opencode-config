@@ -4,7 +4,6 @@ mode: subagent
 model: openai/openai/gpt-5.3-codex
 variant: high
 temperature: 0.1
-steps: 15
 permission:
   write:
     "*": deny

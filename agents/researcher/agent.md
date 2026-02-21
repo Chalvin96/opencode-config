@@ -4,7 +4,7 @@ mode: subagent
 model: openai/gpt-5.1-codex-mini
 temperature: 0.1
 hidden: true
-steps: 5
+steps: 50
 permission:
   bash:
     "*": deny
