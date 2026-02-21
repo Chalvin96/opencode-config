@@ -1,7 +1,8 @@
 ---
 description: Independent code quality reviewer for correctness, risk, and maintainability.
 mode: subagent
-model: openai/codex-5.3
+model: openai/gpt-5.3-codex
+variant: high
 temperature: 0.1
 hidden: true
 steps: 8

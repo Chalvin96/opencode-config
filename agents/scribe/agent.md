@@ -1,7 +1,7 @@
 ---
 description: Obsidian note specialist for decisions, rationale, and session knowledge capture.
 mode: subagent
-model: openai/codex-mini-latest
+model: openai/gpt-5.1-codex-mini
 temperature: 0.2
 hidden: true
 steps: 5

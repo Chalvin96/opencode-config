@@ -1,7 +1,8 @@
 ---
 description: Security risk assessor for exploitable flaws and unsafe defaults.
 mode: subagent
-model: openai/codex-5.3
+model: openai/gpt-5.3-codex
+variant: high
 temperature: 0.1
 hidden: true
 steps: 8

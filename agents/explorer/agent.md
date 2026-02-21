@@ -1,7 +1,7 @@
 ---
 description: Read-only codebase mapper for structure, patterns, and integration points.
 mode: subagent
-model: openai/codex-mini-latest
+model: openai/gpt-5.1-codex-mini
 temperature: 0.1
 hidden: true
 steps: 5

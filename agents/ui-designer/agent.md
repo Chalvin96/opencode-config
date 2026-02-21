@@ -1,7 +1,8 @@
 ---
 description: Frontend implementation specialist for purposeful, high-quality interfaces.
 mode: subagent
-model: openai/codex-5.3
+model: openai/gpt-5.3-codex
+variant: high
 temperature: 0.2
 hidden: true
 steps: 15

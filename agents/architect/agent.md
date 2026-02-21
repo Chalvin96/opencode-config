@@ -1,12 +1,11 @@
 ---
 description: System-level design leader for boundaries, contracts, and technical direction.
-mode: primary
-model: openai/codex-5.3-high
+mode: subagent
+model: openai/openai/gpt-5.3-codex
+variant: high
 temperature: 0.1
 steps: 15
 permission:
-  bash:
-    "*": deny
   write:
     "*": deny
     "docs/*": allow

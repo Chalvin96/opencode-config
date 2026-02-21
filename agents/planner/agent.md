@@ -1,7 +1,8 @@
 ---
 description: Planning lead for turning requests into executable, sequenced work.
 mode: primary
-model: openai/codex-5.3-high
+model: openai/gpt-5.3-codex
+variant: high
 temperature: 0.1
 steps: 15
 permission:
