@@ -25,21 +25,24 @@ Produce a clear, execution-ready plan tied to a GitHub issue so work can move sm
 1. Read the target issue and linked context (PRD, related issues, comments).
 2. Interview for missing scope details, risks, and anti-goals.
 3. Break work into small vertical steps that deliver visible progress.
-4. Add verification criteria for each meaningful step.
-5. Identify dependencies and blockers, and sequence accordingly.
-6. Draft the plan in issue-friendly format:
+4. Define testing decisions for the issue using `testing-philosophy` (required layers, critical behavior coverage, and edge-case focus).
+5. Add verification criteria for each meaningful step.
+6. Identify dependencies and blockers, and sequence accordingly.
+7. Draft the plan in issue-friendly format:
    - Objective
    - Scope and non-goals
    - Ordered implementation steps
+   - Testing decisions
    - Verification checklist
    - Dependencies/blockers
    - Rollout or handoff notes (if relevant)
-7. Run plan review with user/stakeholders, then revise for clarity and sequencing.
-8. Publish plan to the GitHub issue (comment or issue body update based on project norm).
-9. Keep the plan and feedback in the same issue for easy follow-through.
+8. Run plan review with user/stakeholders, then revise for clarity and sequencing.
+9. Publish plan to the GitHub issue (comment or issue body update based on project norm).
+10. Keep the plan and feedback in the same issue for easy follow-through.
 
 ## Output
 - Updated GitHub issue with a structured implementation plan
+- Explicit testing decisions for the issue scope
 - Clear acceptance and verification checklist
 - Explicit dependency/blocker mapping
 - Reviewer feedback notes
@@ -48,6 +51,7 @@ Produce a clear, execution-ready plan tied to a GitHub issue so work can move sm
 - Keep plan steps atomic and executable
 - Prefer vertical slices over layer-by-layer horizontal cuts
 - Do not include stack-specific assumptions unless already established in the repo
+- Testing decisions belong in the plan (not PRD) and should map to pyramid intent
 - If requirements are ambiguous, capture assumptions explicitly
 - Keep the issue as the single source of truth for implementation status
 - Do not treat plan as execution-ready until review feedback is resolved or explicitly deferred
@@ -58,5 +62,6 @@ If issue context is too vague, return a short clarification questionnaire before
 ## Examples
 Issue: "Add user authentication"
 - Plan defines scope (sign-in, sign-out, session handling)
+- Plan includes testing decisions (unit edge cases, integration journey checks, minimal critical e2e)
 - Steps are ordered by dependency and include verification criteria
 - Blockers and rollout notes are added to the same issue

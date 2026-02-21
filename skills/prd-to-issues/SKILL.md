@@ -24,7 +24,7 @@ Decompose a PRD into small, independently demoable issues where each issue deliv
 1. Fetch the parent PRD issue and comments
 2. Explore the project to identify affected layers (for example: data, domain logic, interfaces, verification, operations)
 3. Design vertical slices where each slice represents one user-visible outcome
-4. Propose breakdown with title, layers touched, blockers, and user stories covered
+4. Propose breakdown with title, layers touched, blockers, and user journeys covered
 5. Iterate with the user on granularity and ordering
 6. Create task issues in dependency order using `docs/templates/implementation-issue-template.md`
 7. Include a short planning placeholder in each issue so `write-a-plan` can finalize the execution plan per issue
@@ -33,11 +33,11 @@ Decompose a PRD into small, independently demoable issues where each issue deliv
 Task issues with:
 - Parent PRD linkage
 - Slice ID/name linkage to the PRD Implementation Tracker row
+- User journey reference linkage (which journey each issue advances)
 - Clear description of end-to-end behavior
 - Acceptance criteria (testable)
-- Changes by layer
+- Implementation details (what changes, where, and expected behavior impact)
 - Blocked-by/blocks references
-- User stories covered
 
 Also provide a summary table with issue number, title, and blockers.
 
@@ -46,8 +46,10 @@ Also provide a summary table with issue number, title, and blockers.
 - Each issue should represent an end-to-end slice, not a single-layer horizontal cut
 - Create blockers first
 - Keep one user-visible behavior per issue
-- Use the implementation issue template sections; do not omit Objective, Acceptance Criteria, or Verification
+- Use the implementation issue template sections; do not omit Objective, User Journey Reference, Implementation Details, Testing Decisions, Acceptance Criteria, or Verification
+- Include implementation details in each issue (what to change and target files/artifacts)
 - Preserve PRD slice IDs/names exactly; do not rename them during issue creation
+- Every issue must reference at least one PRD user journey
 
 ## Error Handling
 If the PRD is too vague to slice well, return to PRD refinement before creating issues.

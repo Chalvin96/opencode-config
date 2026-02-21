@@ -5,7 +5,7 @@ compatibility: opencode
 ---
 
 ## Goal
-Produce a comprehensive Product Requirements Document that captures problem, scope, solution direction, and decisions clearly enough to start implementation planning.
+Produce a Product Requirements Document that captures problem, scope, user journeys, and decisions clearly enough to start implementation planning.
 
 ## When to Use
 - Starting a new feature or major change
@@ -23,7 +23,7 @@ Produce a comprehensive Product Requirements Document that captures problem, sco
 ## Process
 1. Collect problem context and business/user motivation
 2. Explore current system behavior and constraints
-3. Interview for roles, edge cases, non-goals, and dependencies
+3. Interview for user journeys, roles, edge cases, non-goals, dependencies, and external preparation/operational tasks
 4. Capture decision considerations for major choices (options considered, chosen approach, rationale, trade-offs, and revisit triggers)
 5. Draft PRD using `docs/templates/prd-template.md`
 6. Run PRD review with user/stakeholders and iterate until ready
@@ -34,12 +34,12 @@ Produce a comprehensive Product Requirements Document that captures problem, sco
 Tracker issue containing:
 - Problem statement
 - Proposed solution
-- User stories/use cases
+- User journeys
 - Technical constraints
 - Implementation decisions (high level)
 - Decision considerations (structured trade-off records)
 - Dependencies
-- Testing decisions
+- External preparation and operations (for example data import/preparation, provisioning, and readiness checks)
 - Out of scope
 - Open questions
 - Notes
@@ -50,6 +50,8 @@ Tracker issue containing:
 ## Rules
 - Keep PRD implementation-aware but code-agnostic
 - Do not include file paths or code snippets
+- Keep PRD focused on user journeys and expected outcomes; avoid low-level implementation detail
+- Include required external preparation/operational tasks when they affect delivery readiness
 - Do not create task issues in this skill (use issue breakdown skill)
 - Keep decision considerations structured; keep notes lightweight and unstructured
 - Do not treat PRD as final until review feedback is resolved or explicitly deferred
