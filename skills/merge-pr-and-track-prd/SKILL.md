@@ -4,60 +4,48 @@ description: Squash-merges a pull request after checks pass, writes a change-awa
 compatibility: opencode
 ---
 
-## Goal
-Safely merge a pull request and immediately record delivery progress in the linked PRD.
+# Merge PR and Track PRD
 
-## When to Use
-- Finalizing an implementation pull request
-- Updating PRD delivery tracking at merge time
-- Enforcing required checks before merge
+## Overview
 
-## Inputs
-- Pull request URL/number
-- Repository context
-- Linked PRD issue URL/number (if not discoverable from PR references)
-- Slice name in the PRD Implementation Tracker (if not inferable)
+Use this skill to complete the merge safely and keep PRD delivery tracking in sync.
 
-## Prerequisites
-- Permission to merge the target pull request
-- Access to GitHub checks/status for the pull request
-- Linked PRD contains an `Implementation Tracker` section
+## Anti-Patterns
+
+- Merging while checks are pending/failing
+- Tracker updates without verified PRD slice mapping
+- Broad edits to PRD content during tracker update
+- Generic squash messages that hide intent
+
+## Checklist
+
+You MUST complete this sequence:
+
+1. Read PR state, checks, approvals, and mergeability
+2. Verify policy gates are satisfied
+3. Draft change-aware squash commit message
+4. Squash-merge PR
+5. Update linked PRD slice to `Merged`
+6. Post short tracker-update note
 
 ## Process
-1. Fetch pull request details (state, base branch, linked issues, mergeability).
-2. Validate all required GitHub checks are successful.
-3. If any required check is pending or failed, do not merge; report blockers clearly.
-4. Confirm pull request is approved and mergeable under repository rules.
-5. Review pull request changes (title, commits, and diff summary) and draft a concise squash commit message that reflects what changed and why.
-6. Squash-merge the pull request using the drafted commit message.
-7. Resolve linked PRD and target slice row in `Implementation Tracker`.
-8. Update the slice status to `Merged` and attach PR reference and merge date.
-9. Preserve existing tracker rows; only update the relevant slice row.
-10. Post a short note in the PRD issue summarizing the tracker update.
 
-## Output
-- Merged pull request (or explicit non-merge reason)
-- Squash commit message aligned with merged changes
-- Updated PRD `Implementation Tracker` row with:
-  - Status: `Merged`
-  - PR link/reference
-  - Merge date
-- Confirmation note with what was updated
+- Stop immediately and report blockers if merge gates fail.
+- Keep tracker edits scoped to one matching slice row.
+- Include PR reference and merge date in tracker update.
+- Preserve requirement content; update delivery status only.
 
-## Rules
-- Never merge when required checks are failing or pending
-- Never bypass branch protection or required review policies
-- Use squash merge only
-- Squash commit message must reflect actual merged changes and rationale
-- If PRD link or slice mapping is ambiguous, ask for clarification before tracker update
-- Keep tracker edits minimal and scoped to the matching row
-- Do not modify PRD requirement content in this skill; update tracking data only
+## Output Format
 
-## Error Handling
-If tracker row cannot be found, add a clearly labeled new row with inferred fields and mark unresolved fields as assumptions.
+Return exactly this structure:
 
-## Examples
-PR `#248` linked to PRD `#120` and slice "Session refresh":
-- Required checks pass
-- PR is squash-merged with a change-aware commit message
-- PRD tracker row for "Session refresh" is updated to `Merged` with `#248` and merge date
+- `Merge Result`
+- `Squash Commit Message`
+- `Tracker Update`
+- `Follow-Up Actions`
+
+## Key Principles
+
+- Policy gates are non-negotiable
+- Merge state and planning state must match
+- Minimal, auditable tracker edits

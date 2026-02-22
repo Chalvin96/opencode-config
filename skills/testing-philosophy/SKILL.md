@@ -6,84 +6,48 @@ compatibility: opencode
 
 # Testing Philosophy
 
-## Role
-Testing guidance for writing reliable, maintainable tests across unit, integration, and end-to-end levels.
+## Overview
 
-## Philosophy
-Use a test pyramid: many unit tests, fewer integration tests, and minimal e2e tests focused on critical flows.
+Use this skill to design test strategy with a practical pyramid: most confidence from fast unit tests, targeted integration, and minimal critical e2e.
 
-Maintainability wins tradeoffs by default.
+## Anti-Patterns
 
-## Principles by area
+- E2E-heavy suites for low-risk logic
+- Integration tests duplicating unit assertions
+- Unit tests with hidden I/O dependencies
+- Vague test naming and mixed structure
 
-### A) Pyramid strategy
-1. Unit tests are the foundation and should be most of the suite.
-2. Integration tests are fewer and validate key user journeys across system boundaries.
-3. E2E tests are minimal and reserved for business-critical flows only.
+## Checklist
 
-Good:
-- Fast feedback, stable suite, broad confidence.
+You MUST complete this sequence:
 
-Bad:
-- Over-reliance on E2E leading to slow, flaky pipelines.
+1. Identify critical behavior and risk hotspots
+2. Allocate coverage by test layer
+3. Define deterministic unit coverage first
+4. Add journey-level integration tests
+5. Add minimal business-critical e2e
 
-### B) Unit test standards
-1. Unit tests must be strictly isolated from external systems (no network, DB, filesystem).
-2. Test one behavior per test.
-3. Cover edge cases and boundary conditions for meaningful logic.
-4. Use factories for test data creation.
+## Process
 
-Good:
-- Deterministic and fast tests with clear failures.
+- Keep unit tests isolated from network, DB, and filesystem.
+- Use integration tests for boundary collaboration.
+- Use e2e only for top user-critical flows.
+- Remove redundant cross-layer scenarios.
+- Prefer setup -> execute -> assert structure.
 
-Bad:
-- Shared mutable fixtures and hidden I/O dependencies.
+## Output Format
 
-### C) Integration and E2E intent
-1. Integration tests validate real collaboration between components for user-relevant journeys.
-2. E2E tests verify only top critical flows (for example sign-in, checkout, core creation flow).
-3. Avoid duplicating the same scenario at all layers without added value.
+Return guidance with exactly these headings:
 
-Good:
-- Each layer has a clear job and avoids redundant coverage.
+- `Pyramid Strategy`
+- `Unit Coverage`
+- `Integration Journeys`
+- `Critical E2E`
+- `Coverage Gaps`
+- `Risks and Follow-Ups`
 
-Bad:
-- Bloated integration/E2E suites that duplicate unit-level assertions.
+## Key Principles
 
-### D) Test structure and naming
-1. Use setup -> execute -> assert structure in every test.
-2. Use factories for mock or fixture objects by default.
-3. Use this naming pattern for all test types:
-   - `test_<method_or_thing_tested>_given_<scenario>_expect_<outcome>`
-
-Good:
-- Tests are searchable, self-explanatory, and consistent.
-
-Bad:
-- Vague names and mixed test structures that obscure intent.
-
-## Quick examples
-- Good unit name: `test_refresh_token_given_expired_token_expect_unauthorized_error`
-- Bad unit name: `test_token`
-
-- Good structure:
-```text
-setup: user = userFactory(active=true)
-execute: result = refreshToken(user, expiredToken)
-assert: result.error == "TOKEN_EXPIRED"
-```
-
-- Bad structure:
-```text
-create user
-call function several times
-assert many unrelated things
-```
-
-## Soft checklist
-- Is this test at the right pyramid layer?
-- Does this test validate one clear behavior?
-- Is the unit test isolated from external systems?
-- Are edge cases covered where logic risk exists?
-- Does the test follow setup -> execute -> assert?
-- Does the test name follow the required pattern?
+- Fast feedback beats exhaustive slowness
+- Every layer proves something unique
+- Confidence quality beats test count

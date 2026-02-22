@@ -1,63 +1,62 @@
 ---
 name: write-a-prd
-description: Interviews the user about a feature and writes a structured PRD in the project tracker
+description: Converts planner interview output into a structured PRD in the project tracker
 compatibility: opencode
 ---
 
-## Goal
-Produce a Product Requirements Document that captures problem, scope, user journeys, and decisions clearly enough to start implementation planning.
+# Write a PRD
 
-## When to Use
-- Starting a new feature or major change
-- Before implementation or task breakdown
-- When scope and requirements need alignment
+## Overview
 
-## Inputs
-- Feature idea or problem statement
-- Target repository/project context
+Use this skill after Planner discovery to turn approved interview output into a clear PRD. Reuse discovery first; ask only targeted follow-ups.
 
-## Prerequisites
-- Access to the project issue tracker
-- Enough stakeholder context to define success criteria
+<HARD-GATE>
+Do not restart broad discovery if approved planner interview output exists. Start from it.
+</HARD-GATE>
+
+## Anti-Patterns
+
+- Re-running full intake after Planner already approved direction
+- Writing implementation-level code detail in PRD
+- Omitting decision tradeoffs and revisit triggers
+- Renaming referenced slice IDs
+
+## Checklist
+
+You MUST complete this sequence:
+
+1. Read approved planner interview output
+2. Map findings into PRD sections
+3. Resolve missing constraints with targeted questions
+4. Record decision considerations and tradeoffs
+5. Publish or update PRD issue with stable slices
 
 ## Process
-1. Collect problem context and business/user motivation
-2. Explore current system behavior and constraints
-3. Interview for user journeys, roles, edge cases, non-goals, dependencies, and external preparation/operational tasks
-4. Capture decision considerations for major choices (options considered, chosen approach, rationale, trade-offs, and revisit triggers)
-5. Draft PRD using `docs/templates/prd-template.md`
-6. Run PRD review with user/stakeholders and iterate until ready
-7. Publish or update the PRD in the project tracker
-8. Ensure each Implementation Tracker row has a stable Slice ID and name that remains unchanged after issue creation
 
-## Output
-Tracker issue containing:
-- Problem statement
-- Proposed solution
-- User journeys
-- Technical constraints
-- Implementation decisions (high level)
-- Decision considerations (structured trade-off records)
-- Dependencies
-- External preparation and operations (for example data import/preparation, provisioning, and readiness checks)
-- Out of scope
-- Open questions
-- Notes
-- Reviewer feedback notes
-- Implementation Tracker table for slice progress (`Planned`, `In Progress`, `Merged`, `Deployed`)
-- Stable slice identifiers (for example `S1`, `S2`) used consistently across PRD, issues, and PRs
+- Keep PRD implementation-aware but code-agnostic.
+- Keep user journeys and scope boundaries explicit.
+- Capture dependencies and operational readiness.
+- Keep Implementation Tracker slice IDs stable once referenced.
+- Defer issue decomposition to `prd-to-issues`.
 
-## Rules
-- Keep PRD implementation-aware but code-agnostic
-- Do not include file paths or code snippets
-- Keep PRD focused on user journeys and expected outcomes; avoid low-level implementation detail
-- Include required external preparation/operational tasks when they affect delivery readiness
-- Do not create task issues in this skill (use issue breakdown skill)
-- Keep decision considerations structured; keep notes lightweight and unstructured
-- Do not treat PRD as final until review feedback is resolved or explicitly deferred
-- Use template sections; do not omit Problem Statement, Scope, Decision Considerations, or Implementation Tracker
-- Do not rename existing slice IDs or names after they are referenced by issues/PRs; add a new slice row when scope changes materially
+## Output Format
 
-## Examples
-Feature request: "Add user authentication"
-Interview covers auth method, session model, protected actions, recovery flow, abuse controls, and rollout constraints.
+PRD must include exactly these sections:
+
+- `Problem Statement`
+- `Proposed Solution`
+- `User Journeys`
+- `Scope` (In Scope / Out of Scope)
+- `Technical Constraints`
+- `Decision Considerations`
+- `Dependencies`
+- `External Preparation and Operations`
+- `Open Questions`
+- `Notes`
+- `Implementation Tracker`
+
+## Key Principles
+
+- Approved discovery is the source of truth
+- Decision clarity over document length
+- PRD should be easy to slice into issues

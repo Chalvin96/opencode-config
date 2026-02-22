@@ -4,60 +4,60 @@ description: Breaks a PRD into independently workable vertical-slice task issues
 compatibility: opencode
 ---
 
-## Goal
-Decompose a PRD into small, independently demoable issues where each issue delivers end-to-end value across relevant layers.
+# PRD to Issues
 
-## When to Use
-- After a PRD exists
-- Before implementation begins
-- When building a dependency-aware task queue
+## Overview
 
-## Inputs
-- Parent PRD issue number or URL
+Use this skill to turn a PRD into dependency-aware vertical slices that can be implemented independently.
 
-## Prerequisites
-- Access to issue tracker integration
-- Parent PRD issue exists
-- Project artifacts available for exploration
+<HARD-GATE>
+Do not create any issue until the full slice breakdown is presented and explicitly approved by the user.
+</HARD-GATE>
+
+## Anti-Patterns
+
+- Creating issues before user approves the breakdown
+- Horizontal (layer-only) issue cuts with no user-visible value
+- Missing blocker links and journey references
+- Vague implementation details that require follow-up clarification
+
+## Checklist
+
+You MUST complete this sequence:
+
+1. Read PRD issue, comments, and implementation tracker
+2. Propose vertical slices with journey mapping and blockers
+3. Present complete breakdown and get explicit approval
+4. Create issues in dependency order
+5. Publish a post-creation summary table
 
 ## Process
-1. Fetch the parent PRD issue and comments
-2. Explore the project to identify affected layers (for example: data, domain logic, interfaces, verification, operations)
-3. Design vertical slices where each slice represents one user-visible outcome
-4. Propose breakdown with title, layers touched, blockers, and user journeys covered
-5. Iterate with the user on granularity and ordering
-6. Create task issues in dependency order using `docs/templates/implementation-issue-template.md`
-7. Include a short planning placeholder in each issue so `write-a-plan` can finalize the execution plan per issue
 
-## Output
-Task issues with:
-- Parent PRD linkage
-- Slice ID/name linkage to the PRD Implementation Tracker row
-- User journey reference linkage (which journey each issue advances)
-- Clear description of end-to-end behavior
-- Acceptance criteria (testable)
-- Implementation details (what changes, where, and expected behavior impact)
-- Blocked-by/blocks references
+- Keep one primary user-visible behavior per issue where practical.
+- Include concrete implementation details and exact targets.
+- Include testing decisions and individually verifiable done criteria.
+- Link each issue to PRD slice ID/name and at least one user journey.
+- Invoke `db-schema-design` for schema/model/migration-heavy slices.
 
-Also provide a summary table with issue number, title, and blockers.
+## Output Format
 
-## Rules
-- Never close or rewrite the parent PRD issue from this skill
-- Each issue should represent an end-to-end slice, not a single-layer horizontal cut
-- Create blockers first
-- Keep one user-visible behavior per issue
-- Use the implementation issue template sections; do not omit Objective, User Journey Reference, Implementation Details, Testing Decisions, Acceptance Criteria, or Verification
-- Include implementation details in each issue (what to change and target files/artifacts)
-- Preserve PRD slice IDs/names exactly; do not rename them during issue creation
-- Every issue must reference at least one PRD user journey
+Each issue body must contain exactly these sections:
 
-## Error Handling
-If the PRD is too vague to slice well, return to PRD refinement before creating issues.
+- `Objective`
+- `User Journey Reference`
+- `Implementation Details`
+- `Testing Decisions`
+- `Done When`
+- `Blocked-By / Blocks`
 
-## Examples
-PRD: "Add user authentication"
-Slices:
-1. Basic sign-in flow end-to-end
-2. Session/token lifecycle handling
-3. Access control on protected actions
-4. Credential recovery flow
+After creation, return a table with columns:
+
+- `Issue`
+- `Title`
+- `Blockers`
+
+## Key Principles
+
+- Approval before creation
+- Vertical value over horizontal decomposition
+- Enough detail to implement without guessing

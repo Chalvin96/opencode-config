@@ -4,52 +4,48 @@ description: Creates a pull request title and description that clearly reference
 compatibility: opencode
 ---
 
-## Goal
-Create a pull request description that makes traceability obvious: what changed, why, and which issue/task it implements.
+# Write PR Description
 
-## When to Use
-- When opening a new pull request
-- When a pull request lacks clear linkage to issue/task context
-- Before requesting review
+## Overview
 
-## Inputs
-- Pull request URL/number
-- Base branch and change summary
-- Linked issue/task references
-- PRD reference (optional)
+Use this skill to produce reviewer-friendly PR messaging: what changed, why it changed, and how to verify it.
 
-## Prerequisites
-- Pull request exists and is accessible
-- At least one related issue/task exists
+## Anti-Patterns
+
+- Generic title/body that hides scope
+- Missing issue/task linkage when available
+- Verification steps that are not reproducible
+- Mixing implementation history with reviewer needs
+
+## Checklist
+
+You MUST complete this sequence:
+
+1. Read PR diff and linked context
+2. Identify primary delivered outcome
+3. Draft outcome-focused title
+4. Draft reviewer-focused body
+5. Update PR title/body
 
 ## Process
-1. Read pull request changes and linked issue/task context.
-2. Confirm the primary issue/task this PR implements.
-3. Draft a title that reflects the implemented outcome and includes issue/task reference in project-preferred format.
-4. Draft PR description with:
-   - What changed
-   - Why it changed
-   - Linked issue/task references
-   - Verification steps
-   - Scope boundaries or non-goals (if relevant)
-5. Ensure links and references are explicit and unambiguous.
-6. Create or update the PR title and description.
 
-## Output
-- Updated PR title with clear issue/task linkage
-- Updated PR description with context, references, and verification steps
+- Keep language concise and specific.
+- Include explicit issue/task references where available.
+- Include verification commands/steps that can be rerun.
+- Mention non-goals only if scope could be misunderstood.
 
-## Rules
-- Every PR must reference at least one issue/task
-- Title must reflect the implemented change, not generic wording
-- Description references must be explicit (issue/task IDs or links)
-- Verification steps must be reproducible
-- Keep wording concise and reviewer-focused
+## Output Format
 
-## Error Handling
-If no linked issue/task can be identified, stop and request the missing reference before finalizing title/description.
+PR body must include exactly:
 
-## Examples
-Issue `#142` implements session refresh reliability:
-- Title: `Improve session refresh reliability (#142)`
-- Description includes summary, rationale, linked issue, and verification steps
+- `Summary`
+- `Why`
+- `Linked Issues/Tasks`
+- `Verification`
+- `Scope Notes` (optional)
+
+## Key Principles
+
+- Traceability over verbosity
+- Reviewer clarity over author narrative
+- Reproducible verification over implied confidence

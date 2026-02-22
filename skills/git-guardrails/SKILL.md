@@ -4,53 +4,50 @@ description: Enforces safe git practices and blocks destructive operations
 compatibility: opencode
 ---
 
-## Goal
-Prevent accidental data loss from destructive git commands during assisted development.
+# Git Guardrails
 
-## When to Use
-- Always active before git operations
-- Especially important during rebases, history rewrites, and cleanup
+## Overview
 
-## Inputs
-None. This is a behavioral safety skill.
+Use this skill to prevent accidental data loss and unsafe history changes.
 
-## Prerequisites
-None.
+<HARD-GATE>
+Never run destructive or history-rewriting commands without explicit user confirmation.
+</HARD-GATE>
+
+## Anti-Patterns
+
+- Running `push --force` by habit
+- Using `reset --hard` before safer alternatives
+- Deleting branches without checking merge state
+- Direct pushes to long-lived protected branches
+
+## Checklist
+
+You MUST complete this sequence before risky git commands:
+
+1. Classify command risk (safe vs destructive/history rewrite)
+2. Prefer safer reversible alternative where possible
+3. Explain risk and request explicit confirmation
+4. Execute only after confirmation
 
 ## Process
-Before any git command, check whether it is destructive or history-rewriting. If risky, stop and request explicit approval.
 
-## Output
-Safe git operations only. Destructive operations require explicit user confirmation.
+- Safe commands (`status`, `diff`, `log`, `add`, `commit`) run normally.
+- Risky commands pause for explicit confirmation.
+- Prefer feature branches for day-to-day work.
+- Offer mitigation options (`stash`, backup branch, `revert`).
 
-## Rules
-Never run these without explicit user confirmation:
-- `git push --force` or `git push -f`
-- `git reset --hard`
-- `git clean -f` or `git clean -fd`
-- `git branch -D`
-- `git checkout .`
-- `git restore .`
+## Output Format
 
-Preferred alternatives:
-- Instead of `reset --hard`: use `git stash`, `git revert`, or a backup branch
-- Instead of `branch -D`: use `git branch -d` when possible
-- Instead of `checkout .`: selectively restore files or stash first
+For blocked commands, return exactly:
 
-Safe operations:
-- `git status`, `git log`, `git diff`
-- `git add`, `git commit`
-- `git stash`, `git stash pop`
-- `git pull` and `git push` without force
+- `Blocked Command`
+- `Why Risky`
+- `Safer Alternatives`
+- `Required Confirmation`
 
-Branches:
-- Do not push to master, main or dev branch directly. Always make another branch first
+## Key Principles
 
-## Error Handling
-If a blocked command seems necessary, explain why and request explicit approval first.
-
-## Examples
-About to run `git reset --hard HEAD~1`:
-- Stop
-- Explain intended outcome
-- Offer `git revert` or backup-branch approach
+- Safety before speed
+- Reversible before irreversible
+- Explicit consent for destructive actions

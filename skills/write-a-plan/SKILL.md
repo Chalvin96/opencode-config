@@ -4,64 +4,144 @@ description: Interviews the user and writes an execution plan directly in a GitH
 compatibility: opencode
 ---
 
-## Goal
-Produce a clear, execution-ready plan tied to a GitHub issue so work can move smoothly through a Kanban board.
+# Write an Execution Plan
 
-## When to Use
-- After a PRD or feature issue exists
-- Before implementation of non-trivial work
-- When an issue needs clearer sequencing, scope, or acceptance checks
+## Overview
 
-## Inputs
-- GitHub issue URL/number
-- Feature context (PRD, notes, or user description)
-- Constraints (time, risk, dependencies)
+Use this skill to create issue-level plans that are clear to execute and easy to verify.
 
-## Prerequisites
-- Access to repository and GitHub issue data
-- Issue has enough context to define intended outcome
+## Anti-Patterns
+
+- Layer-only sequencing without user-visible progress
+- Vague checklist items that cannot be verified
+- Missing dependency order
+- Testing strategy implied but not written
+
+## Checklist
+
+You MUST complete this sequence:
+
+1. Read issue context and acceptance intent
+2. Break work into vertical executable steps
+3. Define testing strategy with `testing-philosophy`
+4. Add verification checkpoints and blocker ordering
+5. Publish plan in the issue thread
 
 ## Process
-1. Read the target issue and linked context (PRD, related issues, comments).
-2. Interview for missing scope details, risks, and anti-goals.
-3. Break work into small vertical steps that deliver visible progress.
-4. Define testing decisions for the issue using `testing-philosophy` (required layers, critical behavior coverage, and edge-case focus).
-5. Add verification criteria for each meaningful step.
-6. Identify dependencies and blockers, and sequence accordingly.
-7. Draft the plan in issue-friendly format:
-   - Objective
-   - Scope and non-goals
-   - Ordered implementation steps
-   - Testing decisions
-   - Verification checklist
-   - Dependencies/blockers
-   - Rollout or handoff notes (if relevant)
-8. Run plan review with user/stakeholders, then revise for clarity and sequencing.
-9. Publish plan to the GitHub issue (comment or issue body update based on project norm).
-10. Keep the plan and feedback in the same issue for easy follow-through.
 
-## Output
-- Updated GitHub issue with a structured implementation plan
-- Explicit testing decisions for the issue scope
-- Clear acceptance and verification checklist
-- Explicit dependency/blocker mapping
-- Reviewer feedback notes
+- Keep steps atomic and independently checkable.
+- Sequence blockers first.
+- Capture assumptions when context is incomplete.
+- Keep rollout/handoff notes only when relevant.
+- Keep plan updates in one issue thread.
 
-## Rules
-- Keep plan steps atomic and executable
-- Prefer vertical slices over layer-by-layer horizontal cuts
-- Do not include stack-specific assumptions unless already established in the repo
-- Testing decisions belong in the plan (not PRD) and should map to pyramid intent
-- If requirements are ambiguous, capture assumptions explicitly
-- Keep the issue as the single source of truth for implementation status
-- Do not treat plan as execution-ready until review feedback is resolved or explicitly deferred
+## Output Format
 
-## Error Handling
-If issue context is too vague, return a short clarification questionnaire before finalizing the plan.
+Plan should include these sections:
 
-## Examples
-Issue: "Add user authentication"
-- Plan defines scope (sign-in, sign-out, session handling)
-- Plan includes testing decisions (unit edge cases, integration journey checks, minimal critical e2e)
-- Steps are ordered by dependency and include verification criteria
-- Blockers and rollout notes are added to the same issue
+- `Objective`
+    - What user-visible outcome should this issue deliver?
+
+- `Linked Context`
+    PRD: <!-- issue link/number -->
+    Parent issue (optional): <!-- issue link/number -->
+
+- `User Journey Reference`
+    - Journey ID(s): <!-- from PRD User Journeys, e.g. J1, J2 -->
+    - Journey title(s):
+        - 
+    - How this issue advances the journey:
+        - 
+- `API Contract Delta` (if applicable)
+    - Endpoint(s):
+        - 
+    - Request/response changes:
+        - 
+    - Auth/permission impact:
+        - 
+    - Error handling changes:
+        - 
+- `Scope`
+    - In scope:
+        - 
+    - Out of scope:
+        - 
+
+- `Implementation Details`
+    - What to change (systems/layers/components):
+        - 
+    - Target files or artifacts:
+        - 
+    - Expected behavior change:
+        - 
+    - Non-trivial constraints:
+        - 
+
+- `Data and Migration Plan` (if applicable)
+    - Schema/model changes:
+        - 
+    - Data import/backfill/cleanup tasks:
+        - 
+    - Idempotency and re-run behavior:
+        - 
+    - Rollback plan:
+        - 
+
+- `Execution Commands`
+    - Build/run commands:
+        - 
+    - Data/setup commands:
+        - 
+    - Test commands:
+        - 
+
+- `Anti-Goals`
+    - What should this implementation explicitly avoid?
+    - Keep this aligned with `docs/design-baseline.md` when UI is involved.
+
+- `Testing Decisions`
+    - Unit test intent (e`dge cases, isolated behaviors):
+    - 
+    - Integration test intent (user journey/system collaboration):
+    - 
+    - E2E test intent (critical flow only, if needed):
+    - 
+    - Follow `testing-phylosophy`
+
+- `Acceptance Criteria`
+    - [ ] Criterion 1 (testable)
+    - [ ] Criterion 2 (testable)
+
+- `Verification`
+    - How to verify behavior locally or in staging:
+    - 
+
+- `Dependencies and Blockers`
+    - Depends on:
+        - 
+    - Blocks:
+        - 
+
+- `Risks and Observability`
+    - Primary implementation risks:
+    - 
+    - Mitigations:
+    - 
+    - Logs/metrics/signals to confirm behavior:
+    - 
+
+- `Implementation Notes`
+    - Constraints or assumptions:
+    - 
+
+- `Definition of Done`
+    - [ ] Acceptance criteria met
+    - [ ] Verification steps completed
+    - [ ] PR references this issue/task
+
+
+- `Key Principles`
+
+    - Clarity over verbosity
+    - Verifiable steps over broad milestones
+    - Planning is complete when execution needs no guesswork

@@ -4,46 +4,47 @@ description: Writes structured notes to an Obsidian vault using consistent metad
 compatibility: opencode
 ---
 
-## Goal
-Capture decisions, findings, and session notes in Obsidian with consistent structure and naming.
+# Write to Obsidian
 
-## When to Use
-- Recording architecture or product decisions
-- Capturing meeting/session notes
-- Saving research or review findings
+## Overview
 
-## Inputs
-- Note title
-- Note type (for example: decision, research, review, session, reference)
-- Content body
-- Vault path (default: `/mnt/Obsidian`)
+Use this skill to store decisions and findings in a consistent, searchable note format.
 
-## Prerequisites
-- Obsidian vault path is writable (default: `/mnt/Obsidian`)
-- File operations are available in current environment
+## Anti-Patterns
+
+- Ad-hoc note layout with inconsistent metadata
+- Overwriting existing notes silently
+- Losing source meaning while rewriting
+- Saving to ambiguous locations
+
+## Checklist
+
+You MUST complete this sequence:
+
+1. Confirm note intent and note type
+2. Resolve destination folder and filename
+3. Normalize metadata and structure
+4. Write note to vault path
+5. Confirm saved path and summary
 
 ## Process
-1. Use vault path `/mnt/Obsidian` unless explicitly overridden
-2. Resolve destination folder from note type
-3. Generate filename: `YYYY-MM-DD-<slug>.md`
-4. Write frontmatter and content
-5. Verify file creation
 
-## Output
-Markdown note in the vault with metadata:
-- title
-- date
-- type
-- tags
+- Default vault path: `/mnt/Obsidian/plan` unless overridden.
+- Use filename format `YYYY-MM-DD-<slug>.md`.
+- Keep metadata light, consistent, and lowercase-hyphenated where relevant.
+- Preserve factual statements from source inputs unless rewrite is requested.
 
-## Rules
-- Use ISO date in filename
-- Never overwrite existing notes; disambiguate filename if needed
-- Keep tags lowercase and hyphenated
+## Output Format
 
-## Error Handling
-If `/mnt/Obsidian` (or provided override path) is unavailable, report clearly and skip write.
+Return exactly this structure:
 
-## Examples
-"Log decision to use token-based authentication"
-- Creates a dated decision note in the configured decisions folder
+- `Note Path`
+- `Note Type`
+- `Metadata`
+- `Content Summary`
+
+## Key Principles
+
+- Durable notes over ephemeral summaries
+- Consistency over personal style drift
+- Fidelity to source intent

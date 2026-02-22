@@ -4,49 +4,51 @@ description: Interviews the user and scaffolds a new SKILL.md using a reusable t
 compatibility: opencode
 ---
 
-## Goal
-Create a new, well-structured SKILL.md that is clear, reusable, and ready to run.
+# Write a Skill
 
-## When to Use
-- Encoding a recurring workflow as a reusable skill
-- Capturing operational know-how that should be repeatable
+## Overview
 
-## Inputs
-- Skill idea and intended behavior
+Use this skill to scaffold new skills with clear triggers, flexible process behavior, and strict output contracts.
 
-## Prerequisites
-- `skills/` directory exists
+## Anti-Patterns
+
+- Broad vague descriptions that trigger unreliably
+- Process rules with no output contract
+- Overly rigid workflows that cannot adapt to context
+- Missing example usage
+
+## Checklist
+
+You MUST complete this sequence:
+
+1. Clarify skill outcome and trigger conditions
+2. Capture required inputs and assumptions
+3. Define workflow steps and decision points
+4. Define strict output format
+5. Write `skills/<name>/SKILL.md`
 
 ## Process
-1. Ask what the skill does in one sentence
-2. Ask when it should trigger
-3. Ask what inputs it requires
-4. Ask what prerequisites must hold
-5. Ask for step-by-step workflow
-6. Ask what outputs it should produce
-7. Ask for rules/anti-patterns
-8. Ask for at least one concrete example
-9. Generate lowercase-hyphenated skill name
-10. Write `skills/<name>/SKILL.md` using the project template
 
-## Output
-`skills/<skill-name>/SKILL.md` with sections:
-- Goal
-- When to Use
-- Inputs
-- Prerequisites
-- Process
-- Output
-- Rules
-- Error Handling
-- Examples
+- Use lowercase-hyphenated skill names.
+- Keep instructions actionable and concise.
+- Keep output format explicit and testable.
+- Include one concrete usage example.
 
-## Rules
-- Skill name: lowercase-hyphenated, concise, unique
-- Description must be specific enough for reliable triggering
-- Process steps must be actionable
-- Include at least one example
+## Output Format
 
-## Examples
-Request: "Create a skill for writing release notes"
-Result: interview + scaffolded `skills/write-release-notes/SKILL.md`
+Generated `SKILL.md` must include:
+
+- Frontmatter (`name`, `description`, `compatibility`)
+- `# Title`
+- `## Overview`
+- `## Anti-Patterns`
+- `## Checklist`
+- `## Process`
+- `## Output Format`
+- `## Key Principles`
+
+## Key Principles
+
+- Trigger clarity over broad coverage
+- Flexible execution with explicit outputs
+- Reusability over one-off instructions

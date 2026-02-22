@@ -4,53 +4,50 @@ description: Designs database schemas with migrations, indexes, and constraints
 compatibility: opencode
 ---
 
-## Goal
-Produce a production-ready schema and migration plan that fits the existing system.
+# DB Schema Design
 
-## When to Use
-- Adding a new entity to the data model
-- Modifying existing tables or relationships
-- Planning a feature that requires schema changes
+## Overview
 
-## Inputs
-- Description of the feature or entity
-- Existing schema context (models, DDL, or migration history)
-- Related PRD or task issue (optional)
+Use this skill to design schema changes that are safe to migrate, easy to review, and aligned with repository conventions.
 
-## Prerequisites
-- Access to current schema definitions and migration history
-- Chosen migration tool for the project
+## Anti-Patterns
+
+- Schema changes without rollback strategy
+- Implicit relational behavior with missing constraints
+- Indexes added without query rationale
+- Large-risk migrations hidden in one opaque step
+
+## Checklist
+
+You MUST complete this sequence:
+
+1. Review current schema and migration history
+2. Define entity and relationship updates
+3. Specify keys, constraints, defaults, and nullability
+4. Plan indexes around expected access patterns
+5. Draft migration and rollback approach
+6. Call out compatibility and rollout risk
 
 ## Process
-1. Explore existing schema and migrations to understand current conventions
-2. Identify entities, relationships, cardinality, and lifecycle rules
-3. Design schema structures and relationships using project-appropriate normalization
-4. Define column types, nullability, defaults, keys, constraints, and cascade behavior
-5. Identify indexes for join paths and frequent query patterns
-6. Update schema definitions in the project's canonical format
-7. Create or generate migration files with the project's migration workflow
-8. Review generated migrations for unintended changes and rollback safety
-9. Present schema diff and migration plan for review
 
-## Output
-- Updated schema definitions in project-standard locations
-- Migration file(s) in the project migration directory
-- Simple schema diagram (ASCII or markdown) showing tables and relationships
+- Follow repository naming/key conventions.
+- Keep referential behavior explicit.
+- Stage risky data transformations safely.
+- Explain index decisions by query behavior.
+- Highlight operational risks for large/hot tables.
 
-## Rules
-- Use stable primary keys and consistent naming conventions
-- Avoid UUID4 as primary key, use either int ot UUID7
-- Include creation/update timestamps when the domain requires auditability
-- Define explicit foreign key constraints and referential behavior
-- Never store secrets in plaintext
-- Index foreign keys by default unless there is a strong reason not to
-- Prefer soft-delete patterns only when product requirements call for recoverability
+## Output Format
 
-## Error Handling
-If migration autogeneration includes unexpected changes, stop and inspect mapping/config drift before applying.
+Return exactly this structure:
 
-## Examples
-Feature: "Users can have multiple addresses"
-- Add `addresses` with `user_id` foreign key
-- Add index on `user_id`
-- Add migration and verify rollback behavior
+- `Schema Changes`
+- `Migration Plan`
+- `Rollback Plan`
+- `Index Plan`
+- `Compatibility and Risk Notes`
+
+## Key Principles
+
+- Migration safety over elegance
+- Explicit constraints over implicit assumptions
+- Query-aware indexing over blanket indexing

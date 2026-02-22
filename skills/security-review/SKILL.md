@@ -4,56 +4,50 @@ description: Standards-aligned security checklist review for application and inf
 compatibility: opencode
 ---
 
-## Goal
-Identify likely security vulnerabilities before release using a structured, repeatable checklist.
+# Security Review
 
-## When to Use
-- Before merging significant changes
-- After auth/authz or data-access changes
-- When introducing new user input paths or integrations
-- On a regular security review cadence
+## Overview
 
-## Inputs
-- Files, modules, or change set to review
+Use this skill to identify exploitable vulnerabilities and unsafe defaults in the changed scope before merge.
 
-## Prerequisites
-- Readable source/config files
-- Dependency audit tooling available for the project's package ecosystem(s)
+## Anti-Patterns
+
+- Treating hardening suggestions as confirmed vulnerabilities
+- Reporting findings without evidence or impact
+- Skipping dependency audit when tooling is available
+- Flooding output with low-signal observations
+
+## Checklist
+
+You MUST complete this sequence:
+
+1. Identify changed attack surface
+2. Run dependency audit tooling (when available)
+3. Review major risk classes
+4. Trace plausible attack paths
+5. Report prioritized findings with remediation
 
 ## Process
-1. Run dependency vulnerability audit with project-appropriate tool(s)
-2. Review changed work against the security checklist below
-3. Record findings with severity and confidence
-4. Produce a report with remediation guidance
 
-## Security Checklist
-- Injection: inputs validated and safely handled in data/command/query contexts
-- Authentication: credentials protected, session/token controls enforced
-- Authorization: permission checks consistently applied
-- Sensitive data exposure: secrets/data protected in transit and at rest
-- Security misconfiguration: secure defaults, least privilege, hardened runtime settings
-- XSS/content injection: untrusted content encoded/sanitized
-- Insecure deserialization/dynamic execution: unsafe runtime execution avoided
-- Known vulnerabilities: dependency scan results triaged
-- Logging/monitoring: no sensitive leakage, useful audit trails
+- Prioritize injection, auth/authz, secrets, data exposure, and unsafe execution.
+- Separate confirmed vulnerabilities from hardening recommendations.
+- Include confidence and impact for each finding.
+- Keep this skill read-only.
 
-## Output
-Security report with:
-- Dependency audit summary
-- Findings by severity (Critical, High, Medium, Low)
-- Location references where applicable
-- Recommended remediation per finding
+## Output Format
 
-## Rules
-- Report only findings with high confidence
-- Do not modify files in this skill; report only
-- Do not skip dependency auditing when tooling is available
+Return exactly this structure:
 
-## Error Handling
-If audit tooling is missing, report the gap and provide exact install/run command options for the current stack.
+- `Dependency Audit Summary`
+- `Critical Findings`
+- `High Findings`
+- `Medium Findings`
+- `Low Findings`
+- `Recommended Remediation`
+- `Residual Risk`
 
-## Examples
-Review authentication module:
-- Finds weak password hashing choice (Critical)
-- Finds missing brute-force protection on sign-in (High)
-- Finds debug mode enabled in production config (High)
+## Key Principles
+
+- Evidence over speculation
+- Actionable remediation over generic warnings
+- Signal over volume
