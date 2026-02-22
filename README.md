@@ -1,6 +1,6 @@
 # opencode-config
 
-Personal opencode agent setup — 12 agents, 15 skills, 4 MCP servers.
+Personal opencode agent setup — 13 agents, 15 skills, 4 MCP servers.
 
 ## Install
 
@@ -17,7 +17,7 @@ The installer will:
 ## Structure
 
 ```
-agents/       12 specialized agents with scoped permissions
+agents/       13 specialized agents with scoped permissions
 skills/       15 reusable workflow skills
 plugins/      native opencode plugins
 config/       global opencode settings (including MCP servers)
@@ -37,6 +37,7 @@ install.sh    interactive installer
 | glm-coder | subagent | glm-4.7 | Strict plan-based code implementation |
 | researcher | subagent | codex-mini-latest | External docs and web search |
 | reviewer | subagent | codex-5.3 | Code review by severity |
+| scope-reviewer | subagent | codex-5.3-high | Issue/PRD scope alignment gate |
 | ui-reviewer | subagent | codex-5.3 | Playwright visual review |
 | security-auditor | subagent | codex-5.3 | Security risk review |
 | scribe | subagent | codex-mini-latest | Obsidian decision/session notes |
