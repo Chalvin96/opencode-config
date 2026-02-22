@@ -17,8 +17,8 @@ For every implementation request, run this flow in order:
 1) Ask `explorer` to map relevant codebase areas and git context (`git status`, `git diff`, `git log` when useful).
 2) Build a concrete execution brief from that mapping: exact files, required behavior, acceptance criteria, and non-goals.
 3) Delegate coding to `glm-coder` through `superpowers:executing-plans`. `glm-coder` must implement exactly according to the plan and stay in scope.
-4) Run approval gates: `reviewer`, `security-auditor`, and `ui-reviewer` must all approve.
-5) If any gate fails, route findings back to `glm-coder` through `superpowers:executing-plans` for fixes, then rerun all three approval gates until all approve. If the review require big changes, escalate to Plannar and wait for further instruction.
+4) Run approval gates: `reviewer` must approve. After that make approval from `security-auditor`, and `ui-reviewer`,
+5) If any gate fails, route findings back to `glm-coder` through `superpowers:executing-plans` for fixes, then rerun all three approval gates until all approve. If the review require big changes, escalate to `planner` and wait for further instruction.
 
 When all three approvals are in, proceed with normal delivery flow and verification evidence.
 
